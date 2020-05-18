@@ -1,24 +1,23 @@
 #pragma once
 #include <ostream>
+#include "Functions.h"
 using namespace std;
 
 class Comanda {
-private:
-	char* name;
-	char* adresa;
-	float pret;
+protected:
+	string nume;
+	string adresa;
+	int pret;
 public:
 	Comanda();
-	Comanda(const char* name, const char* adresa, float pret);
+	Comanda(string nume, string adresa, int pret);
 	Comanda(const Comanda& c);
-	virtual ~Comanda();
-	virtual char* getName();
-	virtual char* getAdresa();
-	virtual float getPret();
-	virtual void setName(const char* name);
-	virtual void setAdresa(const char* adresa);
-	virtual void setPret(float pret);
-	Comanda& operator=(const Comanda& c);
-	bool operator==(const Comanda& c);
-	friend ostream& operator<<(ostream& os, const Comanda& c);
+	~Comanda() {};
+	virtual string getNume();
+	virtual string  getAdresa();
+	virtual int getPret();
+	void setNume(string nume);
+	void setAdresa(string adresa);
+	void setPret(int  pret);
+	string toStringCSV();
 };

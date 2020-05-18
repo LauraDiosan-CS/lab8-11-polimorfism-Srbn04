@@ -148,16 +148,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Comanda.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Mancare.cpp" />
     <ClCompile Include="laborator8.cpp" />
-    <ClCompile Include="Repo.cpp" />
-    <ClCompile Include="RepositoryFile.cpp" />
+    <ClCompile Include="Service.cpp" />
+    <ClCompile Include="Shopping.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Comanda.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="Mancare.h" />
     <ClInclude Include="Repo.h" />
     <ClInclude Include="RepositoryFile.h" />
+    <ClInclude Include="RepositoryFileCSV.h" />
+    <ClInclude Include="RepositoryFileHTML.h" />
+    <ClInclude Include="Service.h" />
+    <ClInclude Include="Shopping.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,65 +1,78 @@
 #include "Mancare.h"
 #include <iostream>
 #include <ostream>
+#include <vector>
 using namespace std;
 
 Mancare::Mancare()
 {
-	this->nume = NULL;
-	this->adresa = NULL;
-	this->lista = "";
+	this->nume = "";
+	this->adresa = "";
+	this->listaPrep = "";
 	this->pret = 0;
 }
-Mancare::Mancare(const char* nume, const char* adresa, string lista, int pret)
+Mancare::Mancare(string nume, string adresa, string lista, int pret): Comanda(nume,adresa,pret)
 {
-	this->nume = new char[strlen(nume) + 1];
-	strcpy_s(this->nume, strlen(nume) + 1, nume);
-
-	this->adresa = new char[strlen(adresa) + 1];
-	strcpy_s(this->adresa, strlen(adresa) + 1, adresa);
-
-	this->pret = pret;
-	this->lista = lista;
+	listaPrep = lista;
 }
 Mancare::~Mancare()
 {
-	delete[] this->nume;
-	delete[] this->adresa;
-	pret = 0;
 }
-Mancare::Mancare(const Mancare& m)
-{
-	this->nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, strlen(m.nume) + 1, m.nume);
 
-	this->adresa = new char[strlen(m.adresa) + 1];
-	strcpy_s(this->adresa, strlen(m.adresa) + 1, m.adresa);
-
-	this->pret = m.pret;
-	this->lista = m.lista;
+Mancare::Mancare(string line, char delim) {
+	vector<string> elements = splitLine(line, delim);
+	this->nume = elements[0];
+	this->adresa = elements[1];
+	this->listaPrep= elements[2];
+	this->pret = stoi(elements[3]);
 }
-string Mancare::getListaPreparate()
+
+
+string Mancare::toStringCSV() {
+
+	string outstring;
+
+	outstring = Comanda::toStringCSV();
+	vector<string>lista = this->listaPrep;
+	outstring += ",";
+	for (unsigned int i = 0; i < lista.size(); i++)
+	{
+		outstring += lista[i];
+
+		if (i < lista.size() - 1)
+		{
+			outstring += " ";
+		}
+	}
+	return outstring;
+}
+
+Mancare::Mancare(const Mancare& m): Comanda(m)
 {
-	return this->lista;
+	this->listaPrep = m.listaPrep;
+}
+string Mancare::getListaPreparate() 
+{
+	return this->listaPrep;
 }
 
 Mancare& Mancare::operator=(const Mancare& m)
 {
-	this->nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, strlen(m.nume) + 1, m.nume);
-
-	this->adresa = new char[strlen(m.adresa) + 1];
-	strcpy_s(this->adresa, strlen(m.adresa) + 1, m.adresa);
-
+	this->nume = m.nume;
+	this->adresa = m.adresa;
+	this->listaPrep = m.listaPrep;
 	this->pret = m.pret;
-	this->lista = m.lista;
-	return*this;
+	return *this;
 }
 
 
 ostream& operator<<(ostream& os, const Mancare& m)
 {
-
-	os << "Numele: " << a.name << " Adresa: " << a.adresa << " Pretul: " << a.pret;
+	os << "Numele: " << m.nume << endl;
+	os << "Adresa: " << m.adresa << endl;
+	os << "Lista: " << m.listaPrep << endl;
+	os << "Pretul: " << m.pret << endl;
+	os << endl;
+	//os << "Numele: " << m.nume << " Adresa: " << m.adresa << " Pretul: " << m.pret;
 	return os;
 }
